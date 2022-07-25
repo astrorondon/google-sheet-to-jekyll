@@ -10,10 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
 #       - uses: actions/checkout@v3
 
 #       - name: Run a one-line script
 #         run: echo Starting testing GSheets to Website
+
+        - name: 'Set up Cloud SDK'
+          uses: 'google-github-actions/setup-gcloud@v0'
+
+        - name: 'Use gcloud CLI'
+          run: 'gcloud info'
         
         - id: googlesheet_actions
           uses: rjoydip/googlesheet-actions@0.1.1
