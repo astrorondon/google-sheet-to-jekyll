@@ -19,7 +19,7 @@ jobs:
         
       - name: Pull GSheet data
         id: 'sheet_to_csv'
-        uses: gsheets-to-csv@1
+        uses: dolthub/gsheets-to-csv@v0.1
         with:
           creds: ${{ secrets.GSHEET_CREDENTIALS }}
           sheets: |
