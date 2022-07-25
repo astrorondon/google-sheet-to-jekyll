@@ -1,0 +1,39 @@
+name: Testing GSheets to Website
+
+on: workflow_dispatch
+
+env:
+  id: '1ZbkUf1tAzt_Lhh1G8ezDgyU1AdUnm26xzPYLtdtWsI8'
+  name: 'temp'
+  range: 'A1:I8'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run a one-line script
+        run: echo Starting testing GSheets to Website
+        
+      - name: Pull GSheet data
+        id: 'sheet_to_csv'
+        uses: gsheets-to-csv@1
+        with:
+          creds: ${{ secrets.GSHEET_CREDENTIALS }}
+          sheets: |
+            [
+              { "id": "${{ env.id }}", "range": "${{ env.range }}", "title": "${{ env.name }}" },
+              { "id": "${{ env.id }}" }
+            ]
+            
+      - name: Print CSV
+        id: "print_csv"
+        env:
+          FILES: ${{ steps.sheet_to_csv.outputs.results }}
+        run: |
+          file_list=($FILES)
+          for file in "${file_list[@]}"; do
+              echo "$(wc -l $file)"
+          done
