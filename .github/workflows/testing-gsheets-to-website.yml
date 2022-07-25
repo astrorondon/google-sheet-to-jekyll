@@ -3,9 +3,7 @@ name: Testing GSheets to Website
 on: workflow_dispatch
 
 env:
-  id: '1ZbkUf1tAzt_Lhh1G8ezDgyU1AdUnm26xzPYLtdtWsI8'
-  name: 'temp'
-  range: 'A1:I8'
+  SHEET_ID: '1u9ZmIqVEADPDh9wu_y03OiVLwSfRv55iWMHe-UISkfw'
 
 jobs:
   build:
@@ -20,7 +18,7 @@ jobs:
       - id: googlesheet_actions
         uses: rjoydip/googlesheet-actions@0.1.1
         with:
-          sheet-id: ${{ secrets.SHEET_ID }}
+          sheet-id: ${{ env.SHEET_ID }}
       - id: echo
         uses: actions/github-script@v2
         with:
